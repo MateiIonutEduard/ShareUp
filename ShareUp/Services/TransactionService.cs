@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -25,6 +26,18 @@ namespace ShareUp.Services
         {
             await store.InsertOneAsync(model);
             return model;
+        }
+
+        public async Task Cleanup()
+        {
+            DateTime Now = DateTime.Now;
+            var list = await store.Find(t => DateTime.Compare(Now, t.Expires) > 0).ToListAsync();
+
+            foreach(var file in list)
+                File.Delete(file.Path);
+
+            var filter = Builders<Transaction>.Filter.Eq(t => DateTime.Compare(Now, t.Expires), 1);
+            await store.DeleteManyAsync(filter);
         }
     }
 }
