@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using ShareUp.Models;
 using ShareUp.Services;
 using System.Text;
+using System.IO.Compression;
 
 namespace ShareUp.Pages
 {
@@ -51,7 +53,20 @@ namespace ShareUp.Pages
             };
 
             await ts.Create(transaction);
-            // Save files as archive on disk...
+            Directory.CreateDirectory($"./Storage/{code}");
+
+            foreach(var file in files)
+            {
+                var ms = new MemoryStream();
+                await file.CopyToAsync(ms);
+
+                var path = file.FileName;
+                System.IO.File.WriteAllBytes($"./Storage/{code}/{path}", ms.ToArray());
+            }
+
+            ZipFile.CreateFromDirectory($"./Storage/{code}", $"./Storage/{code}.zip");
+            Directory.Delete($"./Storage/{code}", true);
+
             return Page();
         }
 

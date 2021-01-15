@@ -37,10 +37,10 @@ C:\Users\Matei\Source\Repos\ShareUp\ShareUp\bin\Debug\netcoreapp3.1\SharpCompres
 C:\Users\Matei\Source\Repos\ShareUp\ShareUp\bin\Debug\netcoreapp3.1\runtimes\win\native\libzstd.dll
 C:\Users\Matei\Source\Repos\ShareUp\ShareUp\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy32.dll
 C:\Users\Matei\Source\Repos\ShareUp\ShareUp\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
-C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.csproj.CoreCompileInputs.cache
-C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.Views.pdb
 C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.csproj.CopyComplete
 C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.dll
 C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.pdb
 C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.genruntimeconfig.cache
+C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.csproj.CoreCompileInputs.cache
+C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.MvcApplicationPartsAssemblyInfo.cache

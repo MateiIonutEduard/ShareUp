@@ -25,6 +25,7 @@
       "ShareUp/1.0.0": {
         "dependencies": {
           "MongoDB.Driver": "2.11.4",
+          "System.IO.Compression": "4.3.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
