@@ -15,7 +15,9 @@ namespace ShareUp.Models
         public string From { get; set; }
 
         public string Path { get; set; }
+        public string Hash { get; set; }
         public List<string> To { get; set; }
+
         public string Link { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime Expires { get; set; }

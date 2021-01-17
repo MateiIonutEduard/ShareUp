@@ -30,9 +30,7 @@ namespace ShareUp.Pages
         }
 
         public void OnGet()
-        {
-
-        }
+        { }
 
         public async Task<IActionResult> OnPostAsync(string from, string[] to, IFormFile[] files)
         {
@@ -43,16 +41,6 @@ namespace ShareUp.Pages
                 link[i] = (byte)table[rand.Next(table.Length)];
 
             string code = Encoding.UTF8.GetString(link);
-            var transaction = new Transaction
-            {
-                From = from,
-                Path = $"./Storage/{code}.zip",
-                To = to.ToList(),
-                Link = code,
-                Expires = DateTime.Now.AddDays(15)
-            };
-
-            await ts.Create(transaction);
             Directory.CreateDirectory($"./Storage/{code}");
 
             foreach(var file in files)
@@ -65,8 +53,25 @@ namespace ShareUp.Pages
             }
 
             ZipFile.CreateFromDirectory($"./Storage/{code}", $"./Storage/{code}.zip");
-            Directory.Delete($"./Storage/{code}", true);
 
+            var fs = new FileStream($"./Storage/{code}.zip", FileMode.Open);
+            var run = MD5.Create();
+
+            byte[] buffer = run.ComputeHash(fs);
+            string hash = Convert.ToBase64String(buffer);
+
+            var transaction = new Transaction
+            {
+                From = from,
+                Path = $"./Storage/{code}.zip",
+                To = to.ToList(),
+                Hash = hash,
+                Link = code,
+                Expires = DateTime.Now.AddDays(15)
+            };
+
+            await ts.Create(transaction);
+            Directory.Delete($"./Storage/{code}", true);
             return Page();
         }
 

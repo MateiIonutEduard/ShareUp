@@ -24,6 +24,10 @@ namespace ShareUp.Services
 
         public async Task<Transaction> Create(Transaction model)
         {
+            var temp = await store.Find(t => t.Hash == model.Hash)
+                    .FirstOrDefaultAsync();
+            
+            if (temp != null) return null;
             await store.InsertOneAsync(model);
             return model;
         }

@@ -8,17 +8,17 @@ using Microsoft.Extensions.Logging;
 
 namespace ShareUp.Pages
 {
-    public class PrivacyModel : PageModel
+    [IgnoreAntiforgeryToken]
+    public class RequestModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<RequestModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public RequestModel(ILogger<RequestModel> logger)
         {
             _logger = logger;
         }
 
         public void OnGet()
-        {
-        }
+        { }
     }
 }
