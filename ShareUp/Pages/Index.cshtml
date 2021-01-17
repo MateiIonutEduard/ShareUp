@@ -6,10 +6,10 @@
 
 <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>-->
 <div class="container" id="bar">
-    <form method="post" enctype="multipart/form-data">
+    <form id="sender" method="post" enctype="multipart/form-data">
         <input class="form-control" type="email" id="from" placeholder="From Address" /><br>
         <input class="form-control" type="email" id="to" placeholder="To Addresses" /><br>
-        <input type="file" class="form-control" id="files" /><br>
+        <input type="file" class="form-control" id="files" multiple/><br>
         <table class="table table-hover">
             <tbody id="data">
                 <!--
@@ -19,4 +19,23 @@
         </table>
         <input type="submit" class="btn btn-outline-info" value="Upload" />
     </form>
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload Progress</h4>
+                    <button type="button" class="close" id="cancel">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar bg-success" style="width:0%">0%</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="close">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
