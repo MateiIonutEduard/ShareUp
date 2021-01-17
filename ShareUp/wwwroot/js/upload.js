@@ -92,6 +92,7 @@ $(document).ready(() => {
             },
             beforeSend: function () {
                 $('.progress-bar').width("0%");
+                $('.progress-bar').html("0%");
             },
             cache: false,
             data: buffer,
