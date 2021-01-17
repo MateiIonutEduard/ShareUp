@@ -10,41 +10,13 @@
     text-align: center;
 }
 
-.dropzone {
-    width: 100px;
-    height: 80px;
-    border: 1px dashed #999;
-    border-radius: 3px;
-    text-align: center;
-}
-
-.upload-icon {
-    margin: 25px 2px 2px 2px;
-}
-
-.upload-input {
-    position: relative;
-    top: -62px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-}
-
 #bar {
     margin-left: 20%;
     margin-top: 10%;
     width: 35%;
 }
 
-#data {
-    margin-top: 25%;
-    margin-left: 25%;
-    width: 50%;
-}
-
-h5 {
-    border-bottom: 1px solid #999;
-    text-align: center;
-    border-bottom-color: cadetblue;
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+    color: white;
 }
