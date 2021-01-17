@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VTl6AkVXGHXEib3SfD5b4R1EB9QdFGJHHsqC4mWPi8MhKWuVdqcSV8qEvVobAws6DJShXrWmff85ca2gakAiIg==",
+  "dgSpecHash": "GHPFO9Ow2OtAZlcJO/TXwfvXaUl1sv1uwO8UsMcZJnyXWiG8pNEnrNRuVfFapxsIiuus47Ur+PjYX3yp5zRKKg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Matei\\Source\\Repos\\ShareUp\\ShareUp\\ShareUp.csproj",
+  "projectFilePath": "C:\\Users\\Matei\\source\\repos\\ShareUp\\ShareUp\\ShareUp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Matei\\.nuget\\packages\\dnsclient\\1.3.1\\dnsclient.1.3.1.nupkg.sha512",
     "C:\\Users\\Matei\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",

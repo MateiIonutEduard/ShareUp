@@ -4,7 +4,21 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<div class="container bg-light-blue-gradient" id="bar">
+    <div class="row" id="data">
+        <h5>Drop file to upload</h5><br><br>
+        <form method="post" enctype="multipart/form-data">
+            <div class="col">
+                <div class="dropzone">
+                    <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+                    <input type="file" class="upload-input" multiple/>
+                </div>
+            </div><br>
+            <div class="col">
+                <input type="submit" class="btn btn-info btn-lg" value="Upload" />
+            </div>
+            <br>
+        </form>
+    </div>
 </div>

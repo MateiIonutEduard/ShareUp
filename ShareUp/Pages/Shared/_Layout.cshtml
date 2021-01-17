@@ -9,42 +9,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand text-success" asp-area="" asp-page="/Index">Share Up</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Index"><i class="fa fa-home"></i>&nbsp; Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Privacy">&nbsp; Request files</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Privacy">&nbsp; Sent</a>
-                        </li>
-                    </ul>
+    <div class="container-fluid">
+        <div class="jumbotron" id="model">
+            <div class="row">
+                <div class="col">
+                    <a href="/" class="nav-link text-secondary"><span class="fa fa-picture-o text-info">&nbsp;ShareUp</span></a>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+                <div class="col">
+                    <a href="#" class="nav-link text-success"><span class="fa fa-cloud text-info"></span>&nbsp;Upload</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="nav-link text-primary"><span class="fa fa-download text-info"></span>&nbsp;Request Files</a>
+                </div>
+            </div><hr>
             @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - ShareUp - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-    </footer>
-
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
