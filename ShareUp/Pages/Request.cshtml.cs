@@ -24,5 +24,14 @@ namespace ShareUp.Pages
 
         public void OnGet()
         { }
+
+        public async Task<FileResult> OnGetDownloadFile(string link)
+        {
+            var item = await trans.Get(link);
+            int last = item.Path.LastIndexOf('/');
+            string name = item.Path.Substring(last + 1);
+            byte[] buffer = System.IO.File.ReadAllBytes(item.Path);
+            return File(buffer, "application/octet-stream", name);
+        }
     }
 }
