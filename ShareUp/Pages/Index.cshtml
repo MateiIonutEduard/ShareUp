@@ -4,37 +4,40 @@
     ViewData["Title"] = "Home page";
 }
 
-<!--<script src="~/lib/jquery/dist/jquery.min.js"></script>-->
-<div class="container" id="bar">
-    <form id="sender" method="post" enctype="multipart/form-data">
-        <input class="form-control" type="email" id="from" placeholder="From Address" /><br>
-        <input class="form-control" type="email" id="to" placeholder="To Addresses" /><br>
-        <input type="file" class="form-control" id="files" multiple/><br>
-        <table class="table table-hover">
-            <tbody id="data">
-                <!--
-                    Generates table with email addresses...
-                -->
-            </tbody>
-        </table>
-        <input type="submit" class="btn btn-outline-info" value="Upload" />
-    </form>
-    <div class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Upload Progress</h4>
-                    <button type="button" class="close" id="cancel">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="progress">
-                        <div class="progress-bar bg-success" style="width:0%">0%</div>
+<h1 id="panel">Simple and reliable file transfers</h1><br>
+<a href="#demo" class="btn btn-primary" id="upload" data-toggle="collapse"><span class="fa fa-cloud"></span>&nbsp;Send files</a>
+<div id="demo" class="collapse">
+    <div class="container" id="bar">
+        <form id="sender" method="post" enctype="multipart/form-data">
+            <input class="form-control" type="email" id="from" placeholder="From Address" /><br>
+            <input class="form-control" type="email" id="to" placeholder="To Addresses" /><br>
+            <input type="file" class="form-control" id="files" multiple /><br>
+            <table class="table table-hover">
+                <tbody id="data">
+                    <!--
+                        Generates table with email addresses...
+                    -->
+                </tbody>
+            </table>
+            <input type="submit" class="btn btn-outline-info" value="Upload" />
+        </form>
+        <div class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Upload Progress</h4>
+                        <button type="button" class="close" id="cancel">&times;</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="close">Close</button>
-                </div>
+                    <div class="modal-body">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width:0%">0%</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="close">Close</button>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
