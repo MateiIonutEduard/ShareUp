@@ -1,6 +1,58 @@
 ﻿@page
+@using ShareUp.Models
+@using ShareUp.Services
+@using System.IO.Compression;
 @model RequestModel
+@inject TransactionService trans
 @{
     ViewData["Title"] = "Request Files";
-}
+    var Request = HttpContext.Request;
 
+    string link = "";
+    Transaction item = null;
+    int count = 1;
+
+
+    if (!string.IsNullOrEmpty(Request.Query["token"].ToString()))
+    {
+        link = Request.Query["token"].ToString();
+        item = await trans.Get(link);
+    }
+}
+<br>
+<br>
+@if (item != null)
+{
+    <table class="table table-hover">
+        @using (ZipArchive archive = ZipFile.OpenRead(item.Path))
+        {
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">File Name</th>
+                    <th scope="col">Hash</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ZipArchiveEntry entry in archive.Entries)
+                {
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@entry.Name</td>
+                        <td>@Convert.ToString(entry.Crc32, 16).ToUpper()</td>
+                    </tr>
+                    count++;
+                }
+            </tbody>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-info alert-dismissible fade show" style="width: 70%; margin-left: 15%;" role="alert">
+        <p class="text-secondary" style="text-align:center; font-family:'Century Gothic'; font:bold 18px;"><strong>No content requested!</strong></p>
+        <button type="button" class="close" data-dismiss="alert" onclick="location.href = '/Index';" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
