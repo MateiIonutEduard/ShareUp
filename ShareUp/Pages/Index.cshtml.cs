@@ -21,13 +21,11 @@ namespace ShareUp.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly AdminServiceProvider provider;
         private readonly TransactionService ts;
         private Random rand;
 
-        public IndexModel(ILogger<IndexModel> logger, TransactionService ts, AdminServiceProvider provider)
+        public IndexModel(ILogger<IndexModel> logger, TransactionService ts)
         {
-            this.provider = provider;
             rand = new Random(Environment.TickCount);
             _logger = logger;
             this.ts = ts;
@@ -35,23 +33,6 @@ namespace ShareUp.Pages
 
         public void OnGet()
         { }
-
-        private void SendEmail(string to, string subject, string body)
-        {
-            SmtpClient host = new SmtpClient(provider.host, provider.port);
-            host.EnableSsl = true;
-
-            host.UseDefaultCredentials = false;
-            host.Credentials = new NetworkCredential(provider.client, provider.secret);
-            MailMessage mail = new MailMessage();
-
-            mail.To.Add(to);
-            mail.From = new MailAddress(provider.client);
-            mail.IsBodyHtml = true;
-
-            mail.Body = body;
-            host.Send(mail);
-        }
 
         public async Task<IActionResult> OnPostAsync(string from, string[] to, IFormFile[] files)
         {

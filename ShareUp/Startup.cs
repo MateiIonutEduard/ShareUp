@@ -29,9 +29,6 @@ namespace ShareUp
             services.Configure<TransactionDatabaseSettings>(
                 Configuration.GetSection(nameof(TransactionDatabaseSettings)));
 
-            services.Configure<AdminServiceProvider>(
-                    Configuration.GetSection(nameof(AdminServiceProvider)));
-
             services.AddSingleton<ITransactionDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<TransactionDatabaseSettings>>().Value);
 
