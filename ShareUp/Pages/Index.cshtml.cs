@@ -14,20 +14,24 @@ using ShareUp.Models;
 using ShareUp.Services;
 using System.Text;
 using System.IO.Compression;
+using Microsoft.Extensions.Configuration;
 
 namespace ShareUp.Pages
 {
     [IgnoreAntiforgeryToken]
     public class IndexModel : PageModel
     {
+        private readonly AdminService ads;
         private readonly ILogger<IndexModel> _logger;
         private readonly TransactionService ts;
         private Random rand;
 
-        public IndexModel(ILogger<IndexModel> logger, TransactionService ts)
+        public IndexModel(ILogger<IndexModel> logger, AdminService ads, TransactionService ts)
         {
             rand = new Random(Environment.TickCount);
             _logger = logger;
+
+            this.ads = ads;
             this.ts = ts;
         }
 
@@ -61,6 +65,7 @@ namespace ShareUp.Pages
 
             byte[] buffer = run.ComputeHash(fs);
             string hash = Convert.ToBase64String(buffer);
+            fs.Close();
 
             var transaction = new Transaction
             {
@@ -74,6 +79,13 @@ namespace ShareUp.Pages
 
             await ts.Create(transaction);
             Directory.Delete($"./Storage/{code}", true);
+
+            foreach(var address in to)
+            {
+                string content = $"Hi there!<br>You received an attachment from <b style='color: #5f9ea0;'>{from}</b>.<br> link: <a href='{ads.setup.domain}Request/?token={code}'>{ads.setup.domain}/Request/?token={code}</a><br><br>Have a nice day!";
+                ads.SendEmail(from, address, "ShareUp", content);
+            }
+
             return Page();
         }
 

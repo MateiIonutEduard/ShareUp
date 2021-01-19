@@ -32,6 +32,13 @@ namespace ShareUp
             services.AddSingleton<ITransactionDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<TransactionDatabaseSettings>>().Value);
 
+            services.Configure<AdminSettings>(
+                Configuration.GetSection(nameof(AdminSettings)));
+
+            services.AddSingleton<IAdminSettings>(sp =>
+                sp.GetRequiredService<IOptions<AdminSettings>>().Value);
+
+            services.AddSingleton<AdminService>();
             services.AddSingleton<TransactionService>();
             services.AddRazorPages();
         }

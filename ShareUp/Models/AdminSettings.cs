@@ -5,19 +5,21 @@ using System.Threading.Tasks;
 
 namespace ShareUp.Models
 {
-    public class AdminServiceProvider : IAdminServiceProvider
+    public class AdminSettings : IAdminSettings
     {
         public string host { get; set; }
         public string port { get; set; }
         public string client { get; set; }
+        public string domain { get; set; }
         public string secret { get; set; }
     }
 
-    public interface IAdminServiceProvider
+    public interface IAdminSettings
     {
-        public string host { get; set; }
-        public string port { get; set; }
-        public string client { get; set; }
-        public string secret { get; set; }
+        string host { get; set; }
+        string port { get; set; }
+        string client { get; set; }
+        string domain { get; set; }
+        string secret { get; set; }
     }
 }
