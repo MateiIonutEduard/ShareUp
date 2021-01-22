@@ -12,6 +12,7 @@
     Transaction item = null;
     int count = 1;
 
+    var userid = HttpContext.User?.Claims?.FirstOrDefault(u => u.Type == "userid").Value;
 
     if (!string.IsNullOrEmpty(Request.Query["token"].ToString()))
     {
@@ -21,9 +22,9 @@
 }
 <br>
 <br>
-@if (item != null)
+@if (!string.IsNullOrEmpty(Request.Query["token"]))
 {
-    <table class="table table-hover">
+    <table class="table table-hover" style="width: 80%;">
         @using (ZipArchive archive = ZipFile.OpenRead(item.Path))
         {
             <thead class="thead-dark">
@@ -48,6 +49,43 @@
     </table>
     <br>
     <a class="nav-link" href="@Url.Page("Request", "DownloadFile", new { link = item.Link })"><span class="fa fa-download"></span>&nbsp;Download Archive</a>
+}
+else if (!string.IsNullOrEmpty(userid))
+{
+    // Add requested transactions from server...
+    var list = await trans.GetTransactions(userid);
+
+    <table class="table table-hover" style="width: 80%;">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">File Name</th>
+                <th scope="col">Sent Count</th>
+                <th scope="col">Expires</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in list)
+            {
+                // There show the specific of transaction...
+                int i = t.Path.LastIndexOf('/');
+                string filename = t.Path.Substring(i + 1);
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@filename</td>
+                    <td>@t.To.Count</td>
+                    <td>@t.Expires.ToString("MM/dd/yyyy HH:mm:ss")</td>
+                    <td>
+                        <button type="button" class="close" aria-label="Close">
+                            <span class="text-danger" aria-hidden="true">&times;</span>
+                        </button>
+                    </td>
+                </tr>
+                count++;
+            }
+        </tbody>
+    </table>
 }
 else
 {
