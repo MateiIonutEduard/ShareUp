@@ -13,10 +13,12 @@ namespace ShareUp.Pages
     [IgnoreAntiforgeryToken]
     public class AccountModel : PageModel
     {
+        private readonly AdminService admin;
         private readonly AccountService account;
 
-        public AccountModel(AccountService account)
+        public AccountModel(AdminService admin, AccountService account)
         {
+            this.admin = admin;
             this.account = account;
         }
 
@@ -61,6 +63,13 @@ namespace ShareUp.Pages
                 return Redirect("/Index");
             }
             else return Redirect("/Account/?handler=Recover");
+        }
+
+        public async Task<IActionResult> OnPostRecover(string address)
+        {
+            var user = await account.FindPassword(address);
+            admin.SendEmail(address, "Recover Password", $"Hi {user.Item1}!<br> Your password is <b style='color: #5f9ea0;'>{user.Item2}.</b><br>All the best!");
+            return Redirect("/Account/?handler=Login");
         }
 
         public async Task<IActionResult> OnGetLogout()

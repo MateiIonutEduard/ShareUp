@@ -24,23 +24,28 @@ namespace ShareUp.Services
         /// <param name="to"></param>
         /// <param name="subject"></param>
         /// <param name="body"></param>
-        public void SendEmail(string from, string to, string subject, string body)
+        public void SendEmail(string to, string subject, string body)
         {
-            int port = int.Parse(setup.port);
-            SmtpClient host = new SmtpClient(setup.host, port);
-            host.EnableSsl = true;
+            try
+            {
+                int port = int.Parse(setup.port);
+                SmtpClient host = new SmtpClient(setup.host, port);
+                host.EnableSsl = true;
 
-            host.UseDefaultCredentials = false;
-            host.Credentials = new NetworkCredential(setup.client, setup.secret);
-            MailMessage mail = new MailMessage();
+                host.UseDefaultCredentials = false;
+                host.Credentials = new NetworkCredential(setup.client, setup.secret);
+                MailMessage mail = new MailMessage();
 
-            mail.To.Add(to);
-            mail.From = new MailAddress(setup.client);
-            mail.Subject = subject;
+                mail.To.Add(to);
+                mail.From = new MailAddress(setup.client);
+                mail.Subject = subject;
 
-            mail.Body = body;
-            mail.IsBodyHtml = true;
-            host.Send(mail);
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                host.Send(mail);
+            }
+            catch(Exception)
+            { }
         }
     }
 }

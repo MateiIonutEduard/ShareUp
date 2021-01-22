@@ -58,6 +58,15 @@ namespace ShareUp.Services
             }
         }
 
+        public async Task<(string, string)> FindPassword(string address)
+        {
+            var user = await users.Find(u => u.Address == address)
+                .FirstOrDefaultAsync();
+
+            if (user != null) return (user.Username, Decrypt(user.Password));
+            else return (string.Empty, string.Empty);
+        }
+
         public string Encrypt(string val)
         {
             byte[] key = Convert.FromBase64String(app.key);
