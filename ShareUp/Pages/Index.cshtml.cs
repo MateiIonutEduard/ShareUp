@@ -24,13 +24,14 @@ namespace ShareUp.Pages
         private readonly AdminService ads;
         private readonly ILogger<IndexModel> _logger;
         private readonly TransactionService ts;
+        private readonly AccountService account;
         private Random rand;
 
-        public IndexModel(ILogger<IndexModel> logger, AdminService ads, TransactionService ts)
+        public IndexModel(AccountService account, ILogger<IndexModel> logger, AdminService ads, TransactionService ts)
         {
+            this.account = account;
             rand = new Random(Environment.TickCount);
             _logger = logger;
-
             this.ads = ads;
             this.ts = ts;
         }
@@ -69,7 +70,7 @@ namespace ShareUp.Pages
 
             var transaction = new Transaction
             {
-                From = from,
+                Userid = "",
                 Path = $"./Storage/{code}.zip",
                 To = to.ToList(),
                 Hash = hash,
@@ -82,7 +83,7 @@ namespace ShareUp.Pages
 
             foreach(var address in to)
             {
-                string content = $"Hi there!<br>You received an attachment from <b style='color: #5f9ea0;'>{from}</b>.<br> link: <a href='{ads.setup.domain}Request/?token={code}'>{ads.setup.domain}/Request/?token={code}</a><br><br>Have a nice day!";
+                string content = $"Hi there!<br>You received an attachment from <b style='color: #5f9ea0;'>{from}</b>.<br> link: <a href='{account.app.domain}Request/?token={code}'>{account.app.domain}/Request/?token={code}</a><br><br>Have a nice day!";
                 ads.SendEmail(from, address, "ShareUp", content);
             }
 

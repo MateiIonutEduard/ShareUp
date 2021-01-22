@@ -16,8 +16,11 @@ namespace ShareUp.Services
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
-            store = database.GetCollection<Transaction>(settings.TransactionCollectionName);
+            store = database.GetCollection<Transaction>("Transactions");
         }
+
+        public async Task<List<Transaction>> GetTransactions(string userid) =>
+            await store.Find(t => t.Userid == userid).ToListAsync();
 
         public async Task<Transaction> Get(string link) =>
             await store.Find(t => t.Link == link).FirstOrDefaultAsync();

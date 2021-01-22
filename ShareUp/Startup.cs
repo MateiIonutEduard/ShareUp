@@ -38,8 +38,23 @@ namespace ShareUp
             services.AddSingleton<IAdminSettings>(sp =>
                 sp.GetRequiredService<IOptions<AdminSettings>>().Value);
 
+            services.Configure<AppSettings>(
+                Configuration.GetSection(nameof(AppSettings)));
+
+            services.AddSingleton<IAppSettings>(sp =>
+                sp.GetRequiredService<IOptions<AppSettings>>().Value);
+
             services.AddSingleton<AdminService>();
             services.AddSingleton<TransactionService>();
+            services.AddSingleton<AccountService>();
+
+            services.AddAuthentication("CookieAuthentication")
+                .AddCookie("CookieAuthentication", config =>
+                {
+                    config.Cookie.Name = "LoginCookie";
+                    config.LoginPath = "/Account";
+                });
+
             services.AddRazorPages();
         }
 
@@ -61,6 +76,8 @@ namespace ShareUp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -10,7 +10,6 @@ namespace ShareUp.Models
         public string host { get; set; }
         public string port { get; set; }
         public string client { get; set; }
-        public string domain { get; set; }
         public string secret { get; set; }
     }
 
@@ -19,7 +18,6 @@ namespace ShareUp.Models
         string host { get; set; }
         string port { get; set; }
         string client { get; set; }
-        string domain { get; set; }
         string secret { get; set; }
     }
 }
