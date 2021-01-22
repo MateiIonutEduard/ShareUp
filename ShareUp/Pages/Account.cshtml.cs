@@ -27,14 +27,15 @@ namespace ShareUp.Pages
 
         public async Task<IActionResult> OnPostLogin(string address, string password)
         {
-            var userid = await account.Login(address, password);
+            var user = await account.Login(address, password);
 
-            if (!string.IsNullOrEmpty(userid))
+            if (!string.IsNullOrEmpty(user.Item2))
             {
                 var claims = new Claim[]
                 {
-                new Claim("userid", userid),
-                new Claim(ClaimTypes.Email, address)
+                    new Claim(ClaimTypes.Name, user.Item1),
+                    new Claim("userid", user.Item2),
+                    new Claim(ClaimTypes.Email, address)
                 };
 
                 var identity = new ClaimsIdentity(claims, "User Identity");
@@ -42,18 +43,19 @@ namespace ShareUp.Pages
                 await HttpContext.SignInAsync(userPrincipal);
                 return Redirect("/Index");
             }
-            else if (userid == null) return Redirect("/Account/?handler=Signup");
+            else if (user.Item1 == null) return Redirect("/Account/?handler=Signup");
             else return Redirect("/Account/?handler=Recover");
         }
 
         public async Task<IActionResult> OnPostSignup(string username, string password, string address)
         {
-            var userid = await account.Signup(username, password, address);
+            var user = await account.Signup(username, password, address);
 
-            if (!string.IsNullOrEmpty(userid))
+            if (!string.IsNullOrEmpty(user.Item2))
             {
                 var claims = new Claim[] {
-                    new Claim("userid", userid),
+                    new Claim(ClaimTypes.Name, user.Item1),
+                    new Claim("userid", user.Item2),
                     new Claim(ClaimTypes.Email, address)
                 };
 

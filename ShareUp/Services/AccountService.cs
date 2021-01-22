@@ -23,27 +23,27 @@ namespace ShareUp.Services
             users = database.GetCollection<User>("Users");
         }
 
-        public async Task<string> Login(string address, string password)
+        public async Task<(string, string)> Login(string address, string password)
         {
             string key = Encrypt(password);
             var user = await users.Find(u => u.Address == address && u.Password == key).FirstOrDefaultAsync();
 
-            if (user != null) return user.Id;
+            if (user != null) return (user.Username, user.Id);
             else
             {
                 user = await users.Find(u => u.Address == address || u.Password == key).FirstOrDefaultAsync();
-                if (user == null) return null;
-                else return string.Empty;
+                if (user == null) return (null, null);
+                else return (string.Empty, string.Empty);
             }
         }
 
-        public async Task<string> Signup(string username, string password, string address)
+        public async Task<(string, string)> Signup(string username, string password, string address)
         {
             string passkey = Encrypt(password);
             var exists = await users.Find(u => u.Address == address && u.Username == username)
                     .FirstOrDefaultAsync();
 
-            if (exists != null) return null;
+            if (exists != null) return (null, null);
             else
             {
                 var user = new User
@@ -54,7 +54,7 @@ namespace ShareUp.Services
                 };
 
                 await users.InsertOneAsync(user);
-                return user.Id;
+                return (user.Username, user.Id);
             }
         }
 
