@@ -84,7 +84,7 @@ namespace ShareUp.Pages
             foreach(var address in to)
             {
                 string content = $"Hi there!<br>You received an attachment from <b style='color: #5f9ea0;'>{from}</b>.<br> link: <a href='{account.app.domain}Request/?token={code}'>{account.app.domain}/Request/?token={code}</a><br><br>Have a nice day!";
-                ads.SendEmail(from, address, "ShareUp", content);
+                ads.SendEmail(address, "ShareUp", content);
             }
 
             return Page();

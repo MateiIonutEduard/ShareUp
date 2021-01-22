@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Account Settings";
     var Request = HttpContext.Request;
-    var handler = Request.Query["handler"];
-    var code = (handler == "Login") ? 1 : ((handler == "Signup") ? 0 : -1);
+    var handler = Request.Query["handler"].ToString();
+    var code = !string.IsNullOrEmpty(handler) ? ((handler == "Login") ? 1 : ((handler == "Signup") ? 0 : -1)) : -2;
 }
 <br>
 <br>
@@ -58,7 +58,7 @@
             <div class="col"></div>
         </div>
     }
-    else
+    else if (code == -1)
     {
         <div class="row">
             <div class="col"></div>
@@ -75,6 +75,28 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    }
+    else
+    {
+        <div class="row" style="text-align: left;">
+            <div class="col"></div>
+            <div class="col-6">
+                <div class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">Register Account!</h4>
+                    <p>You must register in order to send content to other people.</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="mb-0">For this fact, please follow link:</p>
+                        </div>
+                        <div class="col">
+                            <a style="margin-bottom: 1%;" class="nav-link text-primary" href="/Account/?handler=Login">log in</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col"></div>
         </div>

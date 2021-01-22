@@ -68,7 +68,7 @@ namespace ShareUp.Pages
         public async Task<IActionResult> OnPostRecover(string address)
         {
             var user = await account.FindPassword(address);
-            admin.SendEmail(address, "Recover Password", $"Hi {user.Item1}!<br> Your password is <b style='color: #5f9ea0;'>{user.Item2}.</b><br>All the best!");
+            admin.SendEmail(address, "Recover Password", $"Hi {user.Item1}!<br> Your password is <b style='color: #2b5851;'>{user.Item2}.</b><br>All the best!");
             return Redirect("/Account/?handler=Login");
         }
 
