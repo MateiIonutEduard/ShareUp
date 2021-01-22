@@ -74,6 +74,11 @@ namespace ShareUp.Pages
             return Redirect("/Account/?handler=Login");
         }
 
+        public async Task<IActionResult> OnPostChange()
+        {
+            return Page();
+        }
+
         public async Task<IActionResult> OnGetLogout()
         {
             await HttpContext.SignOutAsync();

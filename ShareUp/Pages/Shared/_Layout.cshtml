@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,7 +26,14 @@
                     <a href="/Sent" class="nav-link text-primary"><span class="fa fa-cog text-info"></span>&nbsp;Sent</a>
                 </div>
                 <div class="col">
-                    <a href="/Account" class="nav-link text-primary"><span class="fa fa-user-circle-o text-info"></span>&nbsp;Login</a>
+                    @{
+                        var name = ViewContext.HttpContext.User?.Claims
+                            .FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+
+                        var val = string.IsNullOrEmpty(name) ? "Account" : name;
+                        var link = string.IsNullOrEmpty(name) ? "/Account" : "/Account/?auth=yes";
+                    }
+                    <a href="@link" class="nav-link text-primary"><span class="fa fa-user-circle-o text-info"></span>&nbsp;@val</a>
                 </div>
             </div><hr>
             @RenderBody()
