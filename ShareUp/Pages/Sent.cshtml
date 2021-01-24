@@ -1,0 +1,63 @@
+﻿@page
+@using ShareUp.Models
+@using ShareUp.Services
+@model ShareUp.Pages.SentModel
+@inject TransactionService trans
+@{
+    int count = 1;
+    ViewData["Title"] = "Sent Files";
+    var userid = HttpContext.User?.Claims?.FirstOrDefault(u => u.Type == "userid")?.Value;
+}
+<br>
+<br>
+@if (!string.IsNullOrEmpty(userid))
+{
+    // Add requested transactions from server...
+    var list = await trans.GetTransactions(userid);
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-10">
+            <table class="table table-hover" style="width: 80%; margin-left: 10%;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">File Name</th>
+                        <th scope="col">Sent Count</th>
+                        <th scope="col">Expires</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in list)
+                    {
+                        // There show the specific of transaction...
+                        int i = t.Path.LastIndexOf('/');
+                        string filename = t.Path.Substring(i + 1);
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>@filename</td>
+                            <td>@t.To.Count</td>
+                            <td>@t.Expires.ToString("MM/dd/yyyy HH:mm:ss")</td>
+                            <td>
+                                <button type="button" class="close" aria-label="Close">
+                                    <span class="text-danger" aria-hidden="true">&times;</span>
+                                </button>
+                            </td>
+                        </tr>
+                        count++;
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col"></div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info alert-dismissible fade show" style="width: 70%; margin-left: 15%;" role="alert">
+        <p class="text-secondary" style="text-align:center; font-family:'Century Gothic'; font:bold 18px;"><strong>No files sent!</strong></p>
+        <button type="button" class="close" data-dismiss="alert" onclick="location.href = '/Index';" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}

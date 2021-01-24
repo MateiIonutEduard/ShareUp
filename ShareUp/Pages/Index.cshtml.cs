@@ -15,6 +15,8 @@ using ShareUp.Services;
 using System.Text;
 using System.IO.Compression;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
+#pragma warning disable
 
 namespace ShareUp.Pages
 {
@@ -39,6 +41,7 @@ namespace ShareUp.Pages
         public void OnGet()
         { }
 
+        [Authorize]
         public async Task<IActionResult> OnPostAsync(string from, string[] to, IFormFile[] files)
         {
             string table = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuWwXxYyZz0123456789";
@@ -47,44 +50,50 @@ namespace ShareUp.Pages
             for (int i = 0; i < link.Length; i++)
                 link[i] = (byte)table[rand.Next(table.Length)];
 
-            string code = Encoding.UTF8.GetString(link);
-            Directory.CreateDirectory($"./Storage/{code}");
+            var userid = HttpContext.User?.Claims?
+                .FirstOrDefault(u => u.Type == "userid")?.Value;
 
-            foreach(var file in files)
+            if (!string.IsNullOrEmpty(userid))
             {
-                var ms = new MemoryStream();
-                await file.CopyToAsync(ms);
+                string code = Encoding.UTF8.GetString(link);
+                Directory.CreateDirectory($"./Storage/{code}");
 
-                var path = file.FileName;
-                System.IO.File.WriteAllBytes($"./Storage/{code}/{path}", ms.ToArray());
-            }
+                foreach (var file in files)
+                {
+                    var ms = new MemoryStream();
+                    await file.CopyToAsync(ms);
 
-            ZipFile.CreateFromDirectory($"./Storage/{code}", $"./Storage/{code}.zip");
+                    var path = file.FileName;
+                    System.IO.File.WriteAllBytes($"./Storage/{code}/{path}", ms.ToArray());
+                }
 
-            var fs = new FileStream($"./Storage/{code}.zip", FileMode.Open);
-            var run = MD5.Create();
+                ZipFile.CreateFromDirectory($"./Storage/{code}", $"./Storage/{code}.zip");
 
-            byte[] buffer = run.ComputeHash(fs);
-            string hash = Convert.ToBase64String(buffer);
-            fs.Close();
+                var fs = new FileStream($"./Storage/{code}.zip", FileMode.Open);
+                var run = MD5.Create();
 
-            var transaction = new Transaction
-            {
-                Userid = "",
-                Path = $"./Storage/{code}.zip",
-                To = to.ToList(),
-                Hash = hash,
-                Link = code,
-                Expires = DateTime.Now.AddDays(15)
-            };
+                byte[] buffer = run.ComputeHash(fs);
+                string hash = Convert.ToBase64String(buffer);
+                fs.Close();
 
-            await ts.Create(transaction);
-            Directory.Delete($"./Storage/{code}", true);
+                var transaction = new Transaction
+                {
+                    Userid = "",
+                    Path = $"./Storage/{code}.zip",
+                    To = to.ToList(),
+                    Hash = hash,
+                    Link = code,
+                    Expires = DateTime.Now.AddDays(15)
+                };
 
-            foreach(var address in to)
-            {
-                string content = $"Hi there!<br>You received an attachment from <b style='color: #5f9ea0;'>{from}</b>.<br> link: <a href='{account.app.domain}Request/?token={code}'>{account.app.domain}/Request/?token={code}</a><br><br>Have a nice day!";
-                ads.SendEmail(address, "ShareUp", content);
+                await ts.Create(transaction);
+                Directory.Delete($"./Storage/{code}", true);
+
+                foreach (var address in to)
+                {
+                    string content = $"Hi there!<br>You received an attachment from <b style='color: #5f9ea0;'>{from}</b>.<br> link: <a href='{account.app.domain}Request/?token={code}'>{account.app.domain}/Request/?token={code}</a><br><br>Have a nice day!";
+                    ads.SendEmail(address, "ShareUp", content);
+                }
             }
 
             return Page();
