@@ -16,6 +16,7 @@ using System.Text;
 using System.IO.Compression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 #pragma warning disable
 
 namespace ShareUp.Pages
@@ -42,7 +43,7 @@ namespace ShareUp.Pages
         { }
 
         [Authorize]
-        public async Task<IActionResult> OnPostAsync(string from, string[] to, IFormFile[] files)
+        public async Task<IActionResult> OnPostAsync(string[] to, IFormFile[] files)
         {
             string table = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuWwXxYyZz0123456789";
             byte[] link = new byte[16];
@@ -52,6 +53,9 @@ namespace ShareUp.Pages
 
             var userid = HttpContext.User?.Claims?
                 .FirstOrDefault(u => u.Type == "userid")?.Value;
+
+            var from = HttpContext.User?.Claims?
+                .FirstOrDefault(a => a.Type == ClaimTypes.Email)?.Value;
 
             if (!string.IsNullOrEmpty(userid))
             {
@@ -78,7 +82,7 @@ namespace ShareUp.Pages
 
                 var transaction = new Transaction
                 {
-                    Userid = "",
+                    Userid = userid,
                     Path = $"./Storage/{code}.zip",
                     To = to.ToList(),
                     Hash = hash,

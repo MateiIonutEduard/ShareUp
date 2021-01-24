@@ -54,7 +54,6 @@ $(document).ready(() => {
         });
 
         var buffer = new FormData();
-        buffer.append('from', $('#from').val());
         buffer.append('to', buf[0]);
 
         for (var k = 1; k < buf.length; k++)
