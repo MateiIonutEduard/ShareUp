@@ -101,7 +101,7 @@ $(document).ready(() => {
         });
     });
 
-    $(dcoument).on('submit', '#signup', e => {
+    $(document).on('submit', '#signup', e => {
         var key = $('#password').val();
         var conf = $('confirm').val();
 
@@ -134,12 +134,12 @@ $(document).ready(() => {
 
         if (key === conf && key) {
             $.ajax({
-                url: '/Account/?handler=Change',
-                type: 'post',
+                url: '/Account',
+                type: 'put',
                 data: {
                     'password': key
                 },
-                success: data => {
+                success: () => {
                     setTimeout(() => {
                         location.href = '/Index';
                     }, 500);

@@ -77,7 +77,7 @@ namespace ShareUp.Pages
         }
 
         [Authorize]
-        public async Task<IActionResult> OnPostChange(string password)
+        public async Task<IActionResult> OnPut(string password)
         {
             var userid = HttpContext.User?.Claims?
                 .FirstOrDefault(c => c.Type == "userid")?.Value;
