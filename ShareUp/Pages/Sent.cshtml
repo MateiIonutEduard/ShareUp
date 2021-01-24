@@ -39,8 +39,8 @@
                             <td>@t.To.Count</td>
                             <td>@t.Expires.ToString("MM/dd/yyyy HH:mm:ss")</td>
                             <td>
-                                <button type="button" class="close" aria-label="Close">
-                                    <span class="text-danger" aria-hidden="true">&times;</span>
+                                <button type="button" class="close" onclick="RemoveData('@t.Id')">
+                                    <span class="text-danger">&times;</span>
                                 </button>
                             </td>
                         </tr>
@@ -61,3 +61,13 @@ else
         </button>
     </div>
 }
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <strong class="text-primary" style="margin-left: 5%;">Are you sure you want to delete the transaction?</strong>
+        <div class="btn-group-sm mr-sm-auto" style="margin-left: 25%; margin-top: 5%;">
+            <button class="btn btn-outline-danger btn-sm" id="del"><span class="fa fa-trash">&nbsp; Remove</span></button>&nbsp;&nbsp;
+            <button class="btn btn-outline-info btn-sm" id="can"><span class="fa fa-ban">&nbsp; Cancel</span></button>
+        </div>
+    </div>
+</div>

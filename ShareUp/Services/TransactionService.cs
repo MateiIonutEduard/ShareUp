@@ -22,6 +22,9 @@ namespace ShareUp.Services
         public async Task<List<Transaction>> GetTransactions(string userid) =>
             await store.Find(t => t.Userid == userid).ToListAsync();
 
+        public async Task<Transaction> GetSigle(string id) =>
+            await store.Find(t => t.Id == id).FirstOrDefaultAsync();
+
         public async Task<Transaction> Get(string link) =>
             await store.Find(t => t.Link == link).FirstOrDefaultAsync();
 
@@ -33,6 +36,11 @@ namespace ShareUp.Services
             if (temp != null) return null;
             await store.InsertOneAsync(model);
             return model;
+        }
+
+        public async Task RemoveItem(Transaction trans)
+        {
+            await store.DeleteOneAsync(t => t.Id == trans.Id);
         }
 
         public async Task Cleanup()

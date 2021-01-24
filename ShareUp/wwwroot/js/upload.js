@@ -18,6 +18,40 @@ function RemoveItem(id) {
 
 }
 
+function RemoveData(id) {
+    var modal = $('#myModal');
+    modal.css('display', 'block');
+    var close = $(".close");
+
+    $('#del').on("click", () => {
+        $.ajax({
+            url: '/Sent',
+            type: 'delete',
+            data: {
+                'id': id
+            },
+            success: () => {
+                setTimeout(() => {
+                    location.reload(true);
+                }, 500);
+            },
+            error: (e) => {
+                console.log(e.responseJSON);
+            },
+            cache: false,
+            async: true
+        });
+    });
+
+    $("#can").on("click", function () {
+        close.click();
+    });
+
+    close.on("click", () => {
+        modal.css("display", "none");
+    });
+}
+
 $(document).ready(() => {
     $(document).on('keydown', '#to', e => {
         if (e.keyCode === 13) {
