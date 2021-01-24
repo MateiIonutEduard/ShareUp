@@ -41,11 +41,11 @@
                 <div class="col"></div>
                 <div class="col">
                     <div class="col">
-                        <form action="/Account/?handler=Signup" method="post">
-                            <input type="text" placeholder="Username" class="form-control form-control-sm" name="address" required autofocus><br>
-                            <input type="password" placeholder="Password" class="form-control form-control-sm" name="password" required><br>
-                            <input type="password" placeholder="Confirm" class="form-control form-control-sm" name="confirm" required><br>
-                            <input type="email" placeholder="Address..." class="form-control form-control-sm" name="address" required autofocus><br>
+                        <form id="signup" method="post">
+                            <input type="text" placeholder="Username" class="form-control form-control-sm" id="username" required autofocus><br>
+                            <input type="password" placeholder="Password" class="form-control form-control-sm" id="password" required><br>
+                            <input type="password" placeholder="Confirm" class="form-control form-control-sm" id="confirm" required><br>
+                            <input type="email" placeholder="Address..." class="form-control form-control-sm" id="address" required autofocus><br>
                             <div class="row">
                                 <div class="col">
                                     <input type="submit" class="btn btn-success btn-block btn-sm" value="Sign up" />
@@ -128,9 +128,9 @@
             <div class="row" style="padding-top: 5%;">
                 <div class="col"></div>
                 <div class="col">
-                    <form action="/Account/?handler=Change" method="post">
-                        <input type="password" placeholder="New Password" class="form-control form-control-sm" name="password" required><br>
-                        <input type="password" placeholder="Confirm Password" class="form-control form-control-sm" name="confirm" required><br>
+                    <form id="upkey" method="post">
+                        <input type="password" placeholder="New Password" class="form-control form-control-sm" id="password" required><br>
+                        <input type="password" placeholder="Confirm Password" class="form-control form-control-sm" id="confirm" required><br>
                         <div class="row">
                             <div class="col">
                                 <input type="submit" class="btn btn-success btn-block btn-sm" value="Update" />

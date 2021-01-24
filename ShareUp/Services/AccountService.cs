@@ -67,7 +67,14 @@ namespace ShareUp.Services
             else return (string.Empty, string.Empty);
         }
 
-        public string Encrypt(string val)
+        public async Task UpdatePassword(string userid, string password)
+        {
+            var user = await users.Find(u => u.Id == userid).FirstOrDefaultAsync();
+            user.Password = Encrypt(password);
+            users.ReplaceOne(u => u.Id == userid, user);
+        }
+
+        private string Encrypt(string val)
         {
             byte[] key = Convert.FromBase64String(app.key);
             byte[] salt = Convert.FromBase64String(app.salt);
@@ -87,7 +94,7 @@ namespace ShareUp.Services
             }
         }
 
-        public string Decrypt(string val)
+        private string Decrypt(string val)
         {
             byte[] key = Convert.FromBase64String(app.key);
             byte[] salt = Convert.FromBase64String(app.salt);

@@ -101,4 +101,53 @@ $(document).ready(() => {
             async: true
         });
     });
+
+    $(dcoument).on('submit', '#signup', e => {
+        var key = $('#password').val();
+        var conf = $('confirm').val();
+
+        if (key === conf && key) {
+            var buffer = {
+                'username': $('#username').val(),
+                'password': $('#password').val(),
+                'address': $('#address').val()
+            };
+
+            $.ajax({
+                url: '/Account/?handler=Signup',
+                type: 'post',
+                data: buffer,
+                success: () => {
+                    setTimeout(() => {
+                        location.href = '/Index';
+                    }, 500);
+                },
+                cache: false,
+                async: true
+            });
+        }
+    });
+
+    $(document).on('submit', '#upkey', e => {
+        e.preventDefault();
+        var key = $('#password').val();
+        var conf = $('#confirm').val();
+
+        if (key === conf && key) {
+            $.ajax({
+                url: '/Account/?handler=Change',
+                type: 'post',
+                data: {
+                    'password': key
+                },
+                success: data => {
+                    setTimeout(() => {
+                        location.href = '/Index';
+                    }, 500);
+                },
+                cache: false,
+                async: true
+            });
+        }
+    });
 });

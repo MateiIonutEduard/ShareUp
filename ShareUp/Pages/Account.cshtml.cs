@@ -4,9 +4,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShareUp.Services;
+#pragma warning disable
 
 namespace ShareUp.Pages
 {
@@ -74,9 +76,14 @@ namespace ShareUp.Pages
             return Redirect("/Account/?handler=Login");
         }
 
-        public async Task<IActionResult> OnPostChange()
+        [Authorize]
+        public async Task<IActionResult> OnPostChange(string password)
         {
-            return Page();
+            var userid = HttpContext.User?.Claims?
+                .FirstOrDefault(c => c.Type == "userid")?.Value;
+
+            await account.UpdatePassword(userid, password);
+            return new OkResult();
         }
 
         public async Task<IActionResult> OnGetLogout()
