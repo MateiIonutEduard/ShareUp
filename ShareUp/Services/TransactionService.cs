@@ -42,17 +42,5 @@ namespace ShareUp.Services
         {
             await store.DeleteOneAsync(t => t.Id == trans.Id);
         }
-
-        public async Task Cleanup()
-        {
-            DateTime Now = DateTime.Now;
-            var list = await store.Find(t => DateTime.Compare(Now, t.Expires) > 0).ToListAsync();
-
-            foreach(var file in list)
-                File.Delete(file.Path);
-
-            var filter = Builders<Transaction>.Filter.Eq(t => DateTime.Compare(Now, t.Expires), 1);
-            await store.DeleteManyAsync(filter);
-        }
     }
 }
