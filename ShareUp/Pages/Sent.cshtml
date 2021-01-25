@@ -63,11 +63,25 @@ else
 }
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
-        <strong class="text-primary" style="margin-left: 5%;">Are you sure you want to delete the transaction?</strong>
-        <div class="btn-group-sm mr-sm-auto" style="margin-left: 25%; margin-top: 5%;">
-            <button class="btn btn-outline-danger btn-sm" id="del"><span class="fa fa-trash">&nbsp; Remove</span></button>&nbsp;&nbsp;
-            <button class="btn btn-outline-info btn-sm" id="can"><span class="fa fa-ban">&nbsp; Cancel</span></button>
-        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-2">
+                <span class="close" style="margin-right: 2%;">&times;</span>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-10">
+                <strong class="text-primary" style="margin-left: 5%;">Are you sure you want to delete the transaction?</strong>
+            </div>
+            <div class="col"></div>
+        </div><br>
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <button class="btn btn-outline-danger btn-sm" id="del"><span class="fa fa-trash">&nbsp; Remove</span></button>&nbsp;&nbsp;
+                <button class="btn btn-outline-info btn-sm" id="can"><span class="fa fa-ban">&nbsp; Cancel</span></button>
+            </div>
+        </div><br>
     </div>
 </div>

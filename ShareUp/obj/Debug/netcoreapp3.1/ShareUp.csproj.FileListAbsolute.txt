@@ -1,6 +1,5 @@
 C:\Users\Matei\source\repos\ShareUp\ShareUp\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Matei\source\repos\ShareUp\ShareUp\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\Matei\source\repos\ShareUp\ShareUp\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\Matei\source\repos\ShareUp\ShareUp\bin\Debug\netcoreapp3.1\ShareUp.exe
 C:\Users\Matei\source\repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.csprojAssemblyReference.cache
 C:\Users\Matei\source\repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.AssemblyInfoInputs.cache
@@ -46,3 +45,4 @@ C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\ShareUp.MvcA
 C:\Users\Matei\source\repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\Razor\Pages\Request.cshtml.g.cs
 C:\Users\Matei\source\repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\Razor\Pages\Account.cshtml.g.cs
 C:\Users\Matei\source\repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\Razor\Pages\Sent.cshtml.g.cs
+C:\Users\Matei\Source\Repos\ShareUp\ShareUp\obj\Debug\netcoreapp3.1\scopedcss\bundle\ShareUp.styles.css

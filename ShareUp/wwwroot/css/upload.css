@@ -34,6 +34,12 @@
 
 #myModal {
     padding-top: 20%;
-    padding-left: 5%;
+    margin-left: 25%;
     width: 50%;
+}
+
+.close:hover {
+    color: #dc3545;
+    opacity: 0.9;
+    cursor: pointer;
 }

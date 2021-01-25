@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Matei\\source\\repos\\ShareUp\\ShareUp\\ShareUp.csproj": {}
+    "C:\\Users\\Matei\\Source\\Repos\\ShareUp\\ShareUp\\ShareUp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Matei\\source\\repos\\ShareUp\\ShareUp\\ShareUp.csproj": {
+    "C:\\Users\\Matei\\Source\\Repos\\ShareUp\\ShareUp\\ShareUp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Matei\\source\\repos\\ShareUp\\ShareUp\\ShareUp.csproj",
+        "projectUniqueName": "C:\\Users\\Matei\\Source\\Repos\\ShareUp\\ShareUp\\ShareUp.csproj",
         "projectName": "ShareUp",
-        "projectPath": "C:\\Users\\Matei\\source\\repos\\ShareUp\\ShareUp\\ShareUp.csproj",
+        "projectPath": "C:\\Users\\Matei\\Source\\Repos\\ShareUp\\ShareUp\\ShareUp.csproj",
         "packagesPath": "C:\\Users\\Matei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Matei\\source\\repos\\ShareUp\\ShareUp\\obj\\",
+        "outputPath": "C:\\Users\\Matei\\Source\\Repos\\ShareUp\\ShareUp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Matei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "MongoDB.Driver": {
               "target": "Package",
@@ -65,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
