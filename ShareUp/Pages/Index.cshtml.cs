@@ -106,7 +106,7 @@ namespace ShareUp.Pages
         public async Task<IActionResult> OnDeleteAsync()
         {
             await ts.Cleanup();
-            return Page();
+            return new OkResult();
         }
     }
 }
